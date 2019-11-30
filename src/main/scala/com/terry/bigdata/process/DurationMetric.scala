@@ -1,5 +1,5 @@
 package com.terry.bigdata.process
 
-object DurationUpdate {
+object DurationMetric {
 
 }
