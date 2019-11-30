@@ -1,1 +1,1 @@
-["sbt.Task[scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]",{"hashes":[["/Users/terry/bike-share-metrics-spark/build.sbt","6335bbc40dc4ac57bc66b8d168e36e6d98e7db06"]],"lastModifiedTimes":[]}]
+["sbt.Task[scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]",{"hashes":[["/Users/terry/bike-share-metrics-spark/build.sbt","772ed53e9844fe87566dca75f47906fe93959833"],["/Users/terry/bike-share-metrics-spark/project/assembly.sbt","46f9c2c8dca5d680e1a3b74f9419682f13d32e7e"]],"lastModifiedTimes":[]}]
