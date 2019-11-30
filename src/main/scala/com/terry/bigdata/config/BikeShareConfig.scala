@@ -44,6 +44,16 @@ class BikeShareConfig(args: Seq[String]) extends ScallopConf(args) with Serializ
     }
   )
 
+  val avgDurationPath: ScallopOption[String] = opt[String](
+    name = "avg.duration.path",
+    descr = "path to the average duration files",
+    required = false,
+    default = env() match {
+      case "test" => Option("gs://bike-share-data/test/average-duration/")
+      case "prod" => Option("gs://bike-share-data/average-duration/")
+    }
+  )
+
   val startDate: ScallopOption[String] = opt[String](
     name = "start.date",
     descr = "the date from which the application start to process, in the form of yyyy-mm-dd",
@@ -74,6 +84,12 @@ class BikeShareConfig(args: Seq[String]) extends ScallopConf(args) with Serializ
     name = "user.columns.key",
     required = false,
     default = Option("unique.users.columns")
+  )
+
+  val columnSelectionDurationGroupKey: ScallopOption[String] = opt[String](
+    name = "duration.group.key",
+    required = false,
+    default = Option("duration.group.columns")
   )
 
   verify()

@@ -31,6 +31,8 @@ trait UniqueUserIO extends Logging {
     val outputTempPath = conf.uniqueUserTempPath()
     val outputPath = conf.uniqueUserPath()
 
+    logInfo(s"Writing unique users to ${outputPath}")
+
     updatedDf.distinct().write.mode(SaveMode.Overwrite).json(outputTempPath)
     val temp = spark.read.json(outputTempPath)
     temp.coalesce(1).write.mode(SaveMode.Overwrite).json(outputPath)
