@@ -5,6 +5,7 @@ import org.rogach.scallop.{ScallopConf,ScallopOption}
 class BikeShareConfig(args: Seq[String]) extends ScallopConf(args) with Serializable {
 
   val validEnv = List("test", "prod")
+  val validDayAgo = List(1,3,7)
 
   val env: ScallopOption[String] = opt[String](
     name = "env",
@@ -54,6 +55,24 @@ class BikeShareConfig(args: Seq[String]) extends ScallopConf(args) with Serializ
     }
   )
 
+  val retentionPath: ScallopOption[String] = opt[String](
+    name = "retention.path",
+    descr = "Path to store calculated retention metrics",
+    required = false,
+    default = env() match {
+      case "test" => Option("gs://bike-share-data/test/retention/")
+      case "prod" => Option("gs://bike-share-data/retention/")
+    }
+  )
+
+  val dayAgo: ScallopOption[Int] = opt[Int](
+    name = "day.ago",
+    descr = "day ago to calculate retention",
+    required = false,
+    default = Option(1),
+    validate = validDayAgo.contains(_)
+  )
+
   val startDate: ScallopOption[String] = opt[String](
     name = "start.date",
     descr = "the date from which the application start to process, in the form of yyyy-mm-dd",
@@ -91,6 +110,7 @@ class BikeShareConfig(args: Seq[String]) extends ScallopConf(args) with Serializ
     required = false,
     default = Option("duration.group.columns")
   )
+
 
   verify()
 }

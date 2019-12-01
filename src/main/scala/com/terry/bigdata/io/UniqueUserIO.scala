@@ -37,7 +37,4 @@ trait UniqueUserIO extends Logging {
     val temp = spark.read.json(outputTempPath)
     temp.coalesce(1).write.mode(SaveMode.Overwrite).json(outputPath)
   }
-
-
-
 }

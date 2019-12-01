@@ -22,7 +22,7 @@ trait TripsIO extends Logging with Utils{
 
   def readTrips(spark: SparkSession, conf: BikeShareConfig): DataFrame = {
     val tripsDir = conf.tripsPath()
-    val tripsPath = generatePath(tripsDir, conf)
+    val tripsPath = generatePath(tripsDir, conf.startDatePrefix(), conf.startDate())
 
     logInfo(s"Loading trips from ${tripsPath}")
 

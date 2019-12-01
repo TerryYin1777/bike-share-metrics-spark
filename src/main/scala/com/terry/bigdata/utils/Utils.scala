@@ -10,8 +10,8 @@ import org.apache.spark.sql.functions._
 
 trait Utils extends Logging{
 
-  def generatePath(dir: String, conf: BikeShareConfig): String = {
-    dir + conf.startDatePrefix() + "=" + conf.startDate()
+  def generatePath(dir: String, prefix: String, dateString: String): String = {
+    dir + prefix + "=" + dateString
   }
 
   def dataFrameSelectColumns(df: DataFrame, key: String, conf: BikeShareConfig): DataFrame = {
