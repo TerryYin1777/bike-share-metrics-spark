@@ -57,9 +57,9 @@ trait RetentionIO extends Logging with Utils{
   def makeRetentionReadPath(conf: BikeShareConfig): String = {
     val dayAgoDateString = getDayAgoDateString(conf)
     val inputPath = conf.dayAgo() match {
-      case 1 => conf.retentionPath() + conf.startDatePrefix() + dayAgoDateString
-      case 3 => conf.retentionPath() + "1/" + conf.startDatePrefix() + dayAgoDateString
-      case 7 => conf.retentionPath() + "3/" + conf.startDatePrefix() + dayAgoDateString
+      case 1 => generatePath(conf.retentionPath(), conf.startDatePrefix(), dayAgoDateString)
+      case 3 => generatePath(conf.retentionPath() + "1/", conf.startDatePrefix(), dayAgoDateString)
+      case 7 => generatePath(conf.retentionPath() + "3/", conf.startDatePrefix(), dayAgoDateString)
     }
     inputPath
   }
@@ -67,9 +67,9 @@ trait RetentionIO extends Logging with Utils{
   def makeRetentionWritePath(conf: BikeShareConfig): String = {
     val dayAgoDateString = getDayAgoDateString(conf)
     val outputPath = conf.dayAgo() match {
-      case 1 => conf.retentionPath() + "1/" + conf.startDatePrefix() + dayAgoDateString
-      case 3 => conf.retentionPath() + "3/" + conf.startDatePrefix() + dayAgoDateString
-      case 7 => conf.retentionPath() + "7/" + conf.startDatePrefix() + dayAgoDateString
+      case 1 => generatePath(conf.retentionPath() + "1/", conf.startDatePrefix(), dayAgoDateString)
+      case 3 => generatePath(conf.retentionPath() + "3/", conf.startDatePrefix(), dayAgoDateString)
+      case 7 => generatePath(conf.retentionPath() + "7/", conf.startDatePrefix(), dayAgoDateString)
     }
     outputPath
   }
