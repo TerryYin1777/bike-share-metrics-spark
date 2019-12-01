@@ -27,7 +27,7 @@ trait TripsIO extends Logging with Utils{
     logInfo(s"Loading trips from ${tripsPath}")
 
     val tripsDf = try {
-      Some(spark.read.json(tripsPath)).getOrElse(emptyTripsDf(spark))
+      Some(spark.read.json(tripsPath)).get
     } catch {
       case e: Exception => emptyTripsDf(spark)
     }

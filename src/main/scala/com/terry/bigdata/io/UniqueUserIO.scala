@@ -20,7 +20,7 @@ trait UniqueUserIO extends Logging {
     logInfo(s"Loading unique users from ${inputPath}")
 
     val uniqueUsersDf = try {
-      Some(spark.read.json(inputPath)).getOrElse(emptyUniqueUsersDf(spark))
+      Some(spark.read.json(inputPath)).get
     } catch {
       case e:Exception => emptyUniqueUsersDf(spark)
     }

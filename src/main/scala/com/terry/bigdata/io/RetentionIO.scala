@@ -42,11 +42,15 @@ trait RetentionIO extends Logging with Utils{
     logInfo(s"Reading retention file from ${retentionPath}")
 
     val retentionDf = try {
-      Some(spark.read.json(retentionPath)).getOrElse(emptyRetentionDf(spark))
+      Some(spark.read.json(retentionPath)).get
     } catch {
       case e: Exception => emptyRetentionDf(spark)
     }
-    retentionDf
+    if (retentionDf.head(1).isEmpty) {
+      emptyRetentionDf(spark)
+    } else {
+      retentionDf
+    }
   }
 
   def writeRetention(retentionDf: DataFrame, spark: SparkSession, conf: BikeShareConfig): Unit = {
